@@ -9,6 +9,21 @@
        return view('welcome');
     });
   
+
+
+Route::group(['prefix'=>'auth'],function(){
+
+    Route::get('/', function() {
+         return redirect('auth/login');
+    });
+    
+   Route::get('login', 'Mall\AuthController@getLogin');
+   Route::get('logout', 'Mall\AuthController@getLogout');
+   Route::get('register', 'Mall\AuthController@getRegister');
+   Route::post('register', 'Mall\AuthController@postRegister');
+});
+
+
 Route::controller('login', 'LoginController');
 Route::get('logout', 'LoginController@getLogout');
  

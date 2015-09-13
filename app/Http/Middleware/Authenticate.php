@@ -38,7 +38,7 @@ class Authenticate {
         {
             if ($request->ajax())
             {
-                return view('redminportal::users.notauthorized');
+                return view('users.notauthorized');
             }
             else
             {
