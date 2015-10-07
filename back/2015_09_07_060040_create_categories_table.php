@@ -14,7 +14,7 @@ class CreateCategoriesTable extends Migration
         if (! Schema::hasTable('categories')) {
             Schema::create('categories', function($table) {
                 $table->increments('id');
-                $table->string('name', 255)->unique();
+                $table->string('name', 255)->index();
                 $table->string('short_description', 255);
                 $table->text('long_description')->nullable();
                 $table->boolean('active')->default(true);

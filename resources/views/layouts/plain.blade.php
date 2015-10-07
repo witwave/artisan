@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>RedminPortal by Redooor</title>
+        <title>管理中心</title>
         <link rel="stylesheet" href="{{ URL::to('css/jquery-ui/themes/blitzer/jquery-ui.min.css') }}">
         <link rel="stylesheet" href="{{ URL::to('css/jasny-bootstrap.css') }}">
         <link rel="stylesheet" href="{{ URL::to('css/jasny-responsive.css') }}">
@@ -29,7 +29,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a href="{{ URL::to('admin') }}" class="navbar-brand">
-                            <img src="{{ URL::to('img/favicon.png') }}" title="RedminPortal" class="redooor-nav-logo"> RedminPortal
+                            <img src="{{ URL::to('img/favicon.png') }}" title="" class="redooor-nav-logo hide"> 管理中心
                         </a>
                     </div>
                     <div class="navbar-collapse collapse">

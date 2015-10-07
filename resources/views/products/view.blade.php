@@ -11,7 +11,7 @@
     </div>
 
     @include('partials.errors')
-    
+
     <div class="row">
         <div class="col-md-12">
             <div class="nav-controls text-right">
@@ -33,6 +33,12 @@
                     <th>{{ Lang::get('forms.category') }}</th>
                     <th>{{ Lang::get('forms.sku') }}</th>
                     <th>{{ Lang::get('forms.price') }}</th>
+                    <th>{{ Lang::get('forms.new_price') }}</th>
+                    <th>{{ Lang::get('forms.new_price_date') }}</th>
+                    <th>{{ Lang::get('forms.partner_price') }}</th>
+                    <th>{{ Lang::get('forms.ship_fee') }}</th>
+                    <th>{{ Lang::get('forms.ship_one_fee') }}</th>
+                    <th>{{ Lang::get('forms.credit') }}</th>
                     <th>{{ Lang::get('forms.summary') }}</th>
                     <th>{{ Lang::get('forms.tags') }}</th>
                     <th>{{ Lang::get('forms.featured') }}</th>
@@ -47,6 +53,12 @@
                     <td>{{ $product->category->name }}</td>
                     <td>{{ $product->sku }}</td>
                     <td>{{ $product->price }}</td>
+                    <td>{{ $product->new_price }}</td>
+                    <td>{{ date('Y-m-d',strtotime($product->new_price_date)) }}</td>
+                    <td>{{ $product->partner_price }}</td>
+                    <td>{{ $product->ship_fee }}</td>
+                    <td>{{ $product->ship_one_fee }}</td>
+                    <td>{{ $product->credit }}</td>
                     <td>{{ $product->short_description }}</td>
                     <td>
                         @foreach ($product->tags as $tag)

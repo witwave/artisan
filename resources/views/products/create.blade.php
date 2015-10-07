@@ -10,7 +10,7 @@
             </ol>
         </div>
     </div>
-    
+
     @include('partials.errors')
 
     {!! Form::open(array('files' => TRUE, 'action' => '\App\Http\Controllers\ProductController@postStore', 'role' => 'form')) !!}
@@ -125,11 +125,62 @@
                             {!! Form::text('sku', null, array('class' => 'form-control')) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('price', Lang::get('forms.price')) !!}
-                            <div class="input-group">
-                                <span class="input-group-addon">￥</span>
-                                {!! Form::text('price', null, array('class' => 'form-control')) !!}
-                            </div>
+                            {!! Form::label('brand', Lang::get('forms.brand')) !!}
+                            {!! Form::select('brand', config::get('mall.brand'), '', array('class' => 'form-control', 'id' => 'brand', 'name' => 'brand')) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('color', Lang::get('forms.color')) !!}
+                            {!! Form::select('color', config::get('mall.color'), '', array('class' => 'form-control', 'id' => 'color', 'name' => 'color')) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('type', Lang::get('forms.type')) !!}
+                            {!! Form::select('type', config::get('mall.type'), '', array('class' => 'form-control', 'id' => 'color', 'name' => 'type')) !!}
+                        </div>
+                        <div class="form-group">
+                              {!! Form::label('price', Lang::get('forms.price')) !!}
+                                <div class="input-group">
+                                    <span class="input-group-addon">普通价</span>
+                                    {!! Form::text('price', null, array('class' => 'form-control')) !!}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">加盟价</span>
+                                    {!! Form::text('partner_price', null, array('class' => 'form-control')) !!}
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">提前价</span>
+                                    {!! Form::text('new_price', null, array('class' => 'form-control')) !!}
+                                </div>
+                                <div  class="input-group" id='end_date'>
+                                    <span class="input-group-addon">结束日期</span>
+                                    {!! Form::input('text', 'new_price_date', null, array('class' => 'form-control datepicker', 'readonly')) !!}
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">市场价</span>
+                                    {!! Form::text('market_price', null, array('class' => 'form-control')) !!}
+                                </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            {!! Form::label('credit', Lang::get('forms.credit')) !!}
+                            {!! Form::text('credit', null, array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('ship_fee', Lang::get('forms.ship_fee')) !!}
+                            {!! Form::text('ship_fee', null, array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('ship_one_fee', Lang::get('forms.ship_one_fee')) !!}
+                            {!! Form::text('ship_one_fee', null, array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('ship_mark', Lang::get('forms.ship_mark')) !!}
+                            {!! Form::text('ship_mark', null, array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('flower_description', Lang::get('forms.flower_description')) !!}
+                            {!! Form::text('flower_description', null, array('class' => 'form-control')) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('tags', Lang::get('forms.tags_separated_by_comma')) !!}
@@ -147,6 +198,13 @@
     <script>
         !function ($) {
             $(function(){
+                $(".datepicker").datepicker({
+                    dateFormat: "dd/mm/yy"
+                });
+                $("#end-date .input-group-addon").click(function() {
+                    $("#end_date").datepicker("show");
+                });
+
                 $('#lang-selector li').first().addClass('active');
                 $('#lang-selector a').click(function (e) {
                     e.preventDefault();
