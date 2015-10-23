@@ -38,17 +38,33 @@
                         </a>
                     </th>
                     <th>
-                        <a class="block-header" href="{{ URL::to('admin/users/sort') . '/first_name/' . ($sortBy == 'first_name' && $orderBy == 'asc' ? 'desc' : 'asc') }}">
-                            {{ Lang::get('forms.first_name') }}
-                            @if ($sortBy == 'first_name')
+                        <a class="block-header" href="{{ URL::to('admin/users/sort') . '/name/' . ($sortBy == 'name' && $orderBy == 'asc' ? 'desc' : 'asc') }}">
+                            {{ Lang::get('forms.name') }}
+                            @if ($sortBy == 'name')
                             {!! ($orderBy == 'asc' ? '<span class="caret"></span>' : '<span class="dropup"><span class="caret"></span></span>') !!}
                             @endif
                         </a>
                     </th>
                     <th>
-                        <a class="block-header" href="{{ URL::to('admin/users/sort') . '/last_name/' . ($sortBy == 'last_name' && $orderBy == 'asc' ? 'desc' : 'asc') }}">
-                            {{ Lang::get('forms.last_name') }}
-                            @if ($sortBy == 'last_name')
+                        <a class="block-header" href="{{ URL::to('admin/users/sort') . '/nickname/' . ($sortBy == 'nickname' && $orderBy == 'asc' ? 'desc' : 'asc') }}">
+                            {{ Lang::get('forms.nickname') }}
+                            @if ($sortBy == 'nickname')
+                            {!! ($orderBy == 'asc' ? '<span class="caret"></span>' : '<span class="dropup"><span class="caret"></span></span>') !!}
+                            @endif
+                        </a>
+                    </th>
+                    <th>
+                        <a class="block-header" href="{{ URL::to('admin/users/sort') . '/mobile/' . ($sortBy == 'mobile' && $orderBy == 'asc' ? 'desc' : 'asc') }}">
+                            {{ Lang::get('forms.mobile') }}
+                            @if ($sortBy == 'mobile')
+                            {!! ($orderBy == 'asc' ? '<span class="caret"></span>' : '<span class="dropup"><span class="caret"></span></span>') !!}
+                            @endif
+                        </a>
+                    </th>
+                    <th>
+                        <a class="block-header" href="{{ URL::to('admin/users/sort') . '/type/' . ($sortBy == 'type' && $orderBy == 'asc' ? 'desc' : 'asc') }}">
+                            {{ Lang::get('forms.usertype') }}
+                            @if ($sortBy == 'type')
                             {!! ($orderBy == 'asc' ? '<span class="caret"></span>' : '<span class="dropup"><span class="caret"></span></span>') !!}
                             @endif
                         </a>
@@ -100,8 +116,10 @@
 		    @foreach ($users as $user)
 			    <tr>
 			        <td>{{ $user->email }}</td>
-			        <td>{{ $user->first_name }}</td>
-			        <td>{{ $user->last_name }}</td>
+			        <td>{{ $user->name }}</td>
+			        <td>{{ $user->nickname }}</td>
+                    <td>{{ $user->mobile }}</td>
+                    <td>{{ Config::get('mall.types')[$user->type] }}</td>
 			        <td>
 						@foreach($user->groups as $group)
 						<span class="label label-info">{{ $group->name }}</span>
@@ -114,9 +132,9 @@
                             <span class="label label-danger"><span class='glyphicon glyphicon-remove'></span></span>
                         @endif
 		            </td>
-			        <td>@if ($user->last_login){{ date('d-M-y g:i a', strtotime($user->last_login)) }}@endif</td>
-			        <td>{{ date('d-M-y', strtotime($user->created_at)) }}</td>
-			        <td>{{ date('d-M-y', strtotime($user->updated_at)) }}</td>
+			        <td>@if ($user->last_login){{ date('Y-m-d g:i a', strtotime($user->last_login)) }}@endif</td>
+			        <td>{{ date('Y-m-d', strtotime($user->created_at)) }}</td>
+			        <td>{{ date('Y-m-d', strtotime($user->updated_at)) }}</td>
 					<td class="table-actions text-right">
                         <div class="btn-group">
                             <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown">

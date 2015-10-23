@@ -33,8 +33,8 @@
                     <th>{{ Lang::get('forms.category') }}</th>
                     <th>{{ Lang::get('forms.sku') }}</th>
                     <th>{{ Lang::get('forms.price') }}</th>
-                    <th>{{ Lang::get('forms.new_price') }}</th>
-                    <th>{{ Lang::get('forms.new_price_date') }}</th>
+                    <th>{{ Lang::get('forms.market_price') }}</th>
+                    <th>{{ Lang::get('forms.down_time') }}</th>
                     <th>{{ Lang::get('forms.partner_price') }}</th>
                     <th>{{ Lang::get('forms.ship_fee') }}</th>
                     <th>{{ Lang::get('forms.ship_one_fee') }}</th>
@@ -43,6 +43,7 @@
                     <th>{{ Lang::get('forms.tags') }}</th>
                     <th>{{ Lang::get('forms.featured') }}</th>
                     <th>{{ Lang::get('forms.active') }}</th>
+                    <th>{{ Lang::get('forms.can_use_credit') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -53,8 +54,8 @@
                     <td>{{ $product->category->name }}</td>
                     <td>{{ $product->sku }}</td>
                     <td>{{ $product->price }}</td>
-                    <td>{{ $product->new_price }}</td>
-                    <td>{{ date('Y-m-d',strtotime($product->new_price_date)) }}</td>
+                    <td>{{ $product->market_price }}</td>
+                    <td>{{ date('Y-m-d',strtotime($product->down_time)) }}</td>
                     <td>{{ $product->partner_price }}</td>
                     <td>{{ $product->ship_fee }}</td>
                     <td>{{ $product->ship_one_fee }}</td>
@@ -74,6 +75,13 @@
                     </td>
                     <td>
                         @if ($product->active)
+                            <span class="label label-success"><span class='glyphicon glyphicon-ok'></span></span>
+                        @else
+                            <span class="label label-danger"><span class='glyphicon glyphicon-remove'></span></span>
+                        @endif
+                    </td>
+                        <td>
+                        @if ($product->can_use_credit)
                             <span class="label label-success"><span class='glyphicon glyphicon-ok'></span></span>
                         @else
                             <span class="label label-danger"><span class='glyphicon glyphicon-remove'></span></span>

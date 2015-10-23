@@ -10,9 +10,9 @@ class CreateUserDaysTable extends Migration {
 	 *名称（如生日）
 	 *日期  x年x月
 	 *备注
-	 *是否提醒（提前一周邮箱提醒）
+	 *是否提醒（提前一周邮箱和短信提醒）
 	 *提醒的邮箱：
-	 *
+	 *短信手机
 	 * @return void
 	 */
 	public function up() {
@@ -25,6 +25,7 @@ class CreateUserDaysTable extends Migration {
 			$table->boolean('remind_enable')->default(0);
 			$table->integer('remind_beforeday')->default(7);
 			$table->string('remind_email')->nullable();
+			$table->string('remind_mobile')->nullable();
 			$table->timestamps();
 		});
 	}

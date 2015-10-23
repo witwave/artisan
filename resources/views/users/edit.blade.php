@@ -23,20 +23,23 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        {!! Form::label('first_name', Lang::get('forms.first_name')) !!}
-                        {!! Form::text('first_name', $user->first_name, array('class' => 'form-control', 'required')) !!}
+                        {!! Form::label('name', Lang::get('forms.name')) !!}
+                        {!! Form::text('name', $user->name, array('class' => 'form-control', 'required')) !!}
                     </div>
 
                     <div class="form-group">
-                        {!! Form::label('last_name', Lang::get('forms.last_name')) !!}
-                        {!! Form::text('last_name', $user->last_name, array('class' => 'form-control', 'required')) !!}
+                        {!! Form::label('nickname', Lang::get('forms.nickname')) !!}
+                        {!! Form::text('nickname', $user->nickname, array('class' => 'form-control', 'required')) !!}
                     </div>
 
                     <div class="form-group">
                         {!! Form::label('email', Lang::get('forms.email')) !!}
                         {!! Form::email('email', $user->email, array('class' => 'form-control', 'required')) !!}
                     </div>
-
+                    <div class="form-group">
+                        {!! Form::label('mobile', Lang::get('forms.mobile')) !!}
+                        {!! Form::text('mobile', $user->mobile, array('class' => 'form-control', 'required')) !!}
+                    </div>
                     <div class="form-group">
                         {!! Form::label('password', Lang::get('forms.password')) !!}
                         {!! Form::password('password', array('class' => 'form-control')) !!}

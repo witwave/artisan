@@ -2,7 +2,7 @@
 
 return array(
 	'login' => '登入',
-	'email' => '电邮',
+	'email' => '电子邮箱',
 	'password' => '密码',
 	'coupon_code' => '优惠券',
 	'description' => '描述',
@@ -137,4 +137,12 @@ return array(
 	'new_price_date' => '结束日期',
 	'partner_price' => '加盟价',
 	'credit' => '积分',
+	'can_use_credit'=>'可使用积分',
+	'down_time'=>'自动下架时间',
+	'material'=>'花材',
+	'market_price'=>'市场价',
+	'usertype'=>'用户类型',
+	'mobile'=>'手机',
+	'nickname'=>'呢称'
+	
 );

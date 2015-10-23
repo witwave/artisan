@@ -35,6 +35,14 @@
                     </label>
                 </div>
             </div>
+            
+                 <div class="form-group">
+                        <div class="checkbox">
+                            <label for="featured-checker">
+                                {!! Form::checkbox('can_use_credit', $product->can_use_credit,  $product->can_use_credit, array('id' => 'can_use_credit-checker')) !!} {{ Lang::get('forms.can_use_credit') }}
+                            </label>
+                        </div>
+                    </div>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -150,19 +158,25 @@
                         {!! Form::text('partner_price', $product->partner_price, array('class' => 'form-control')) !!}
                     </div>
                     <div class="input-group">
-                        <span class="input-group-addon">提前价</span>
-                        {!! Form::text('new_price', $product->new_price, array('class' => 'form-control')) !!}
-                    </div>
-                    <div  class="input-group" id='end_date'>
-                        <span class="input-group-addon">结束日期</span>
-                        {!! Form::input('text', 'new_price_date', $product->new_price_date->format('d/m/Y'), array('class' => 'form-control datepicker', 'readonly')) !!}
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                    </div>
-                    <div class="input-group">
                         <span class="input-group-addon">市场价</span>
                         {!! Form::text('market_price', $product->market_price, array('class' => 'form-control')) !!}
                     </div>
                 </div>
+               <div class="form-group">
+                   {!! Form::label('type', Lang::get('forms.down_time')) !!}
+                    <div  class="input-group" id='end_date'>
+                        {!! Form::input('text','down_time', date('d/m/Y',strtotime($product->down_time)), array('class' => 'form-control datepicker')) !!}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                     </div>
+                 </div>
+                 <div class="form-group">
+                            {!! Form::label('material', Lang::get('forms.material')) !!}
+                            {!! Form::text('material', $product->material, array('class' => 'form-control')) !!}
+                 </div>
+                 <div class="form-group">
+                      {!! Form::label('credit', Lang::get('forms.credit')) !!}
+                      {!! Form::text('credit',  $product->credit, array('class' => 'form-control')) !!}
+                 </div>
                 <div class="form-group">
                     {!! Form::label('ship_fee', Lang::get('forms.ship_fee')) !!}
                     {!! Form::text('ship_fee', $product->ship_fee, array('class' => 'form-control')) !!}

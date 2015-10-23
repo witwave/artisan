@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\Group;
+use Config;
 
 class UserController extends Controller
 {
@@ -24,7 +25,6 @@ class UserController extends Controller
     public function getCreate()
     {
         $roles = Group::orderBy('name')->lists('name', 'id');
-        
         return view('users/create')->with('roles', $roles);
     }
     
@@ -63,8 +63,8 @@ class UserController extends Controller
         $sid = \Input::get('id');
         
         $rules = array(
-            'first_name'    => 'required',
-            'last_name'     => 'required',
+            'name'    => 'required',
+            'nickname'     => 'required',
             'email'         => 'required'
         );
         
@@ -82,9 +82,10 @@ class UserController extends Controller
             return redirect($path)->withErrors($validation)->withInput();
         }
 
-        $first_name    = \Input::get('first_name');
-        $last_name    = \Input::get('last_name');
+        $name    = \Input::get('name');
+        $nickname    = \Input::get('nickname');
         $email         = \Input::get('email');
+        $mobile     = \Input::get('mobile');
         $password     = \Input::get('password');
         $role         = \Input::get('role');
         $activated     = (\Input::get('activated') == '' ? false : true);
@@ -105,9 +106,10 @@ class UserController extends Controller
         if ($password != '') {
             $user->password = \Hash::make($password);
         }
-        $user->first_name = $first_name;
-        $user->last_name = $last_name;
+        $user->name = $name;
+        $user->nickname = $nickname;
         $user->activated = $activated;
+         $user->mobile = $mobile;
         
         if (! $user->save()) {
             $errors = new \Illuminate\Support\MessageBag;

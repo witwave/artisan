@@ -90,8 +90,6 @@ class ProductController extends Controller {
 			'price' => 'numeric',
 			'sku' => 'required|alpha_dash|unique:products,sku' . (isset($sid) ? ',' . $sid : ''),
 			'category_id' => 'required',
-			'new_price' => 'required|numeric',
-			'new_price_date' => 'required',
 			'partner_price' => 'required|numeric',
 			'credit' => 'required|numeric',
 			'market_price' => 'numeric',
@@ -112,20 +110,24 @@ class ProductController extends Controller {
 			$image = Input::file('image');
 			$featured = (Input::get('featured') == '' ? false : true);
 			$active = (Input::get('active') == '' ? false : true);
+			
+			$can_use_credit = (Input::get('can_use_credit') == '' ? false : true);
+			
 			$category_id = Input::get('category_id');
 			$tags = Input::get('tags');
 
 			$brand = Input::get('brand');
 			$color = Input::get('color');
 			$type = Input::get('type');
-			$new_price = Input::get('new_price', 0);
-			$new_price_date = DateTime::createFromFormat('d/m/Y', Input::get('new_price_date'));
+			$down_time = DateTime::createFromFormat('d/m/Y', Input::get('down_time'));
 			$partner_price = Input::get('partner_price');
 			$ship_fee = Input::get('ship_fee', 0);
 			$ship_one_fee = Input::get('ship_one_fee', 0);
 			$ship_mark = Input::get('ship_mark');
 			$market_price = Input::get('market_price');
 			$show_market_price = $market_price > 0;
+			
+			$material = Input::get('material');
 
 			$qty = Input::get('qty', 0);
 			$credit = Input::get('credit', 0);
@@ -153,8 +155,9 @@ class ProductController extends Controller {
 
 			$product->color = $color;
 			$product->type = $type;
-			$product->new_price = $new_price;
-			$product->new_price_date = $new_price_date;
+			$product->down_time = $down_time;
+			$product->material = $material;
+			$product->can_use_credit = $can_use_credit;
 			$product->partner_price = $partner_price;
 			$product->ship_fee = $ship_fee;
 			$product->ship_one_fee = $ship_one_fee;

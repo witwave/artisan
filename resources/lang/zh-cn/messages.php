@@ -28,7 +28,7 @@ return array(
     'export_to_csv' => '导出',
     'select_category_to_load_media' => 'Please select a category to load medias.',
     'no_media_in_this_category' => "There's no media in this category.",
-    'allow_user_to_login_this_account' => 'Allow user to log in to this account.',
+    'allow_user_to_login_this_account' => '充许用户进入系统.',
     'leave_password_empty_to_keep_existing_password' => 'Leave the password field empty to keep existing password.',
     'not_authorized_to_view_this_page' => "You're not authorized to view this page.",
     'allow_select_multiple' => 'You can select multiple items by holding Ctrl/Cmd + click.',

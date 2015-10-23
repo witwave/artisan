@@ -52,7 +52,8 @@ class CreateOrdersTable extends Migration {
 				$table->timestamp('require_send_time')->nullable(); //要求发货时间
 				$table->boolean('has_special')->default(FALSE); //
 				$table->string('special_content', 255)->nullable();
-				$table->text('card')->nullable();
+				$table->text('card')->nullable();//卡片内
+				$table->timestamp('card_expired')->nullable();//卡片失效时间
 				$table->boolean('self_get')->default(FALSE); //上门取货
 				$table->boolean('sent')->default(FALSE); //是否发货
 				$table->integer('sent_by')->default(FALSE); //发货人ID

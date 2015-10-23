@@ -22,20 +22,23 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        {!! Form::label('first_name', Lang::get('forms.first_name')) !!}
-                        {!! Form::text('first_name', null, array('class' => 'form-control', 'autofocus', 'required')) !!}
+                        {!! Form::label('name', Lang::get('forms.name')) !!}
+                        {!! Form::text('name', null, array('class' => 'form-control', 'autofocus', 'required')) !!}
                     </div>
 
                     <div class="form-group">
-                        {!! Form::label('last_name', Lang::get('forms.last_name')) !!}
-                        {!! Form::text('last_name', null, array('class' => 'form-control', 'required')) !!}
+                        {!! Form::label('nickname', Lang::get('forms.nickname')) !!}
+                        {!! Form::text('nickname', null, array('class' => 'form-control', 'required')) !!}
                     </div>
 
                     <div class="form-group">
                         {!! Form::label('email', Lang::get('forms.email')) !!}
                         {!! Form::email('email', null, array('class' => 'form-control', 'required')) !!}
                     </div>
-
+                     <div class="form-group">
+                        {!! Form::label('mobile', Lang::get('forms.mobile')) !!}
+                        {!! Form::text('mobile', null, array('class' => 'form-control', 'required')) !!}
+                    </div>
                     <div class="form-group">
                         {!! Form::label('password', Lang::get('forms.password')) !!}
                         {!! Form::password('password', array('class' => 'form-control', 'required')) !!}
@@ -45,7 +48,10 @@
                         {!! Form::label('password_confirmation', Lang::get('forms.reenter_password')) !!}
                         {!! Form::password('password_confirmation', array('class' => 'form-control', 'required')) !!}
                     </div>
-
+                    <div class="form-group">
+                        {!! Form::label('type', Lang::get('forms.usertype')) !!}
+                        {!! Form::select('type', Config::get('mall.types'), null, array('class' => 'form-control')) !!}
+                    </div>
                     <div class="form-group">
                         {!! Form::label('role', Lang::get('forms.role')) !!}
                         {!! Form::select('role', $roles, null, array('class' => 'form-control')) !!}

@@ -12,7 +12,7 @@ return array(
     'edit' => '编辑',
     'delete' => '删除',
     'activate' => '激活',
-    'deactivate' => 'Deactivate',
+    'deactivate' => '禁止',
     'delete_no' => '取消',
     'delete_yes' => '确认删除',
     'close' => '关闭',

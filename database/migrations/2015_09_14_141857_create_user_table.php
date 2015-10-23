@@ -28,7 +28,7 @@ class CreateUserTable extends Migration {
 	 * 所在区
 	 * 所在详细地址
 	 * 所在经度
-	 * 所以纬度
+	 * 所在纬度
 	 * @return void
 	 */
 	public function up() {
