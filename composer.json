@@ -57,7 +57,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
      "repositories": [
-        {"type": "composer", "url": "http://packagist.phpcomposer.com"},
+        {"type": "composer", "url": "http://packagist.cn"},
         {"packagist": false}
     ]
 }

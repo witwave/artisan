@@ -111,7 +111,7 @@ return array(
 	'reenter_password' => '重新输入密码',
 	'role' => '角色',
 	'activate_now' => '现在激活',
-	'groups' => 'Groups',
+	'groups' => '用户组',
 	'activated' => '激活',
 	'last_login' => '最后一次登录',
 	'create_bundle' => '新增',
@@ -143,6 +143,7 @@ return array(
 	'market_price'=>'市场价',
 	'usertype'=>'用户类型',
 	'mobile'=>'手机',
-	'nickname'=>'呢称'
+	'nickname'=>'呢称',
+	'user_type'=>'用户类型'
 	
 );

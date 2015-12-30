@@ -52,6 +52,11 @@
                     </div>
 
                     <div class="form-group">
+                        {!! Form::label('type', Lang::get('forms.user_type')) !!}
+                        {!! Form::select('type', Config::get('mall.types'), $user->type, array('class' => 'form-control')) !!}
+                    </div>
+
+                    <div class="form-group">
                         {!! Form::label('role', Lang::get('forms.role')) !!}
                         {!! Form::select('role', $roles, $group->id, array('class' => 'form-control')) !!}
                     </div>

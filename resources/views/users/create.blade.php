@@ -49,11 +49,11 @@
                         {!! Form::password('password_confirmation', array('class' => 'form-control', 'required')) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label('type', Lang::get('forms.usertype')) !!}
+                        {!! Form::label('type', Lang::get('forms.user_type')) !!}
                         {!! Form::select('type', Config::get('mall.types'), null, array('class' => 'form-control')) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label('role', Lang::get('forms.role')) !!}
+                        {!! Form::label('role', Lang::get('forms.groups')) !!}
                         {!! Form::select('role', $roles, null, array('class' => 'form-control')) !!}
                     </div>
                     <div class="well">

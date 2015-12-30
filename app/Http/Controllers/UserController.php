@@ -3,6 +3,7 @@
 use App\Models\User;
 use App\Models\Group;
 use Config;
+use Illuminate\Support\Facades\Input;
 
 class UserController extends Controller
 {
@@ -10,9 +11,9 @@ class UserController extends Controller
     {
         $sortBy = 'email';
         $orderBy = 'asc';
-        
+
         $users = User::orderBy($sortBy, $orderBy)->paginate(20);
-        
+
         $data = array(
             'sortBy' => $sortBy,
             'orderBy' => $orderBy,
@@ -27,11 +28,11 @@ class UserController extends Controller
         $roles = Group::orderBy('name')->lists('name', 'id');
         return view('users/create')->with('roles', $roles);
     }
-    
+
     public function getEdit($sid)
     {
         $user = User::find($sid);
-        
+
         if ($user == null) {
             $errors = new \Illuminate\Support\MessageBag;
             $errors->add(
@@ -40,34 +41,34 @@ class UserController extends Controller
             );
             return redirect('/admin/users')->withErrors($errors);
         }
-        
+
         $roles = Group::orderBy('name')->lists('name', 'id');
-        
+
         $group = $user->groups()->first();
-        
+
         if ($group == null) {
             $group = Group::orderBy('name')->first();
         }
-        
+
         $data = array(
             'roles' => $roles,
             'user' => $user,
             'group' => $group
         );
-        
+
         return view('users/edit', $data);
     }
 
     public function postStore()
     {
         $sid = \Input::get('id');
-        
+
         $rules = array(
-            'name'    => 'required',
-            'nickname'     => 'required',
-            'email'         => 'required'
+            'name' => 'required',
+            'nickname' => 'required',
+            'email' => 'required'
         );
-        
+
         if (isset($sid)) {
             $rules['password'] = 'confirmed|min:6';
         } else {
@@ -75,23 +76,23 @@ class UserController extends Controller
         }
 
         $validation = \Validator::make(\Input::all(), $rules);
-        
+
         $path = (isset($sid) ? 'admin/users/edit/' . $sid : 'admin/users/create');
-        
+
         if ($validation->fails()) {
             return redirect($path)->withErrors($validation)->withInput();
         }
 
-        $name    = \Input::get('name');
-        $nickname    = \Input::get('nickname');
-        $email         = \Input::get('email');
-        $mobile     = \Input::get('mobile');
-        $password     = \Input::get('password');
-        $role         = \Input::get('role');
-        $activated     = (\Input::get('activated') == '' ? false : true);
-        
+        $name = \Input::get('name');
+        $nickname = \Input::get('nickname');
+        $email = \Input::get('email');
+        $mobile = \Input::get('mobile');
+        $password = \Input::get('password');
+        $role = \Input::get('role');
+        $activated = (\Input::get('activated') == '' ? false : true);
+        $type=Input::get('type',0);
         $user = (isset($sid) ? User::find($sid) : new User);
-        
+
         if ($user == null) {
             $errors = new \Illuminate\Support\MessageBag;
             $errors->add(
@@ -100,7 +101,7 @@ class UserController extends Controller
             );
             return redirect('/admin/users')->withErrors($errors);
         }
-        
+
         // Save or Update
         $user->email = $email;
         if ($password != '') {
@@ -109,9 +110,10 @@ class UserController extends Controller
         $user->name = $name;
         $user->nickname = $nickname;
         $user->activated = $activated;
-         $user->mobile = $mobile;
-        
-        if (! $user->save()) {
+        $user->mobile = $mobile;
+        $user->type=$type;
+
+        if (!$user->save()) {
             $errors = new \Illuminate\Support\MessageBag;
             $errors->add(
                 'editError',
@@ -119,7 +121,7 @@ class UserController extends Controller
             );
             return redirect($path)->withErrors($errors)->withInput();
         }
-        
+
         // Find user's group
         $old_group = $user->groups()->first();
         $new_group = Group::find($role);
@@ -147,7 +149,7 @@ class UserController extends Controller
     public function getDelete($sid)
     {
         $user = User::find($sid);
-        
+
         if ($user == null) {
             $errors = new \Illuminate\Support\MessageBag;
             $errors->add(
@@ -156,17 +158,17 @@ class UserController extends Controller
             );
             return redirect('/admin/users')->withErrors($errors);
         }
-        
+
         // Delete the user
         $user->delete();
-        
+
         return redirect()->back();
     }
 
     public function getActivate($sid)
     {
         $user = User::find($sid);
-        
+
         if ($user == null) {
             $errors = new \Illuminate\Support\MessageBag;
             $errors->add(
@@ -175,18 +177,18 @@ class UserController extends Controller
             );
             return redirect('/admin/users')->withErrors($errors);
         }
-        
+
         // Activate the user
         $user->activated = true;
         $user->save();
-        
+
         return redirect()->back();
     }
 
     public function getDeactivate($sid)
     {
         $user = User::find($sid);
-        
+
         if ($user == null) {
             $errors = new \Illuminate\Support\MessageBag;
             $errors->add(
@@ -195,36 +197,36 @@ class UserController extends Controller
             );
             return redirect('/admin/users')->withErrors($errors);
         }
-        
+
         // Deactivate the user
         $user->activated = false;
         $user->save();
-        
+
         return redirect()->back();
     }
-    
+
     public function getSort($sortBy = 'email', $orderBy = 'asc')
     {
         $inputs = array(
             'sortBy' => $sortBy,
             'orderBy' => $orderBy
         );
-        
+
         $rules = array(
-            'sortBy'  => 'required|regex:/^[a-zA-Z0-9 _-]*$/',
+            'sortBy' => 'required|regex:/^[a-zA-Z0-9 _-]*$/',
             'orderBy' => 'required|regex:/^[a-zA-Z0-9 _-]*$/'
         );
-        
+
         $validation = \Validator::make($inputs, $rules);
 
         if ($validation->fails()) {
             return redirect('admin/users')->withErrors($validation);
         }
-        
+
         if ($orderBy != 'asc' && $orderBy != 'desc') {
             $orderBy = 'asc';
         }
-        
+
         if ($sortBy == 'group') {
             $users = User::LeftJoin('users_groups', 'users_groups.user_id', '=', 'users.id')
                 ->LeftJoin('groups', 'groups.id', '=', 'users_groups.group_id')
@@ -234,13 +236,13 @@ class UserController extends Controller
         } else {
             $users = User::orderBy($sortBy, $orderBy)->paginate(20);
         }
-        
+
         $data = array(
             'sortBy' => $sortBy,
             'orderBy' => $orderBy,
             'users' => $users
         );
-        
+
         return view('users/view', $data);
     }
 }
