@@ -11,9 +11,9 @@ class UserGroupSeeder extends Seeder {
 		DB::table('users_groups')->delete();
 
 		$user = new User;
-		$user->email = 'admin@admin.com';
-		$user->password = \Hash::make("admin");
-		$user->name = 'System Admin';
+		$user->email = 'admin@bdbeloved.com';
+		$user->password = \Hash::make("bdbeloved");
+		$user->name = '系统管理员';
 		$user->activated = 1;
 		$user->type = 2;
 

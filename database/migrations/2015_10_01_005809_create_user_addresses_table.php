@@ -19,10 +19,11 @@ class CreateUserAddressesTable extends Migration {
 		Schema::create('user_addresses', function (Blueprint $table) {
 			$table->increments('id');
 			$table->integer('user_id');
+			$table->boolean('default')->default(0);
 			$table->string('name', 60);
 			$table->string('receiver_name', 60);
 			$table->string('receiver_mobile', 11);
-			$table->string('receiver_telphone', 16);
+			$table->string('receiver_telephone', 16);
 			$table->string('postcode', 6);
 			$table->string('address', 400);
 			$table->string('province')->nullable();

@@ -36,7 +36,7 @@ class CreateOrdersTable extends Migration {
 			Schema::create('orders', function (Blueprint $table) {
 				$table->increments('id');
 				$table->timestamps();
-				$table->integer('out_order_id')->index(); //外部订单ID (BDyyyyMMddHHmmss+round(0000~1000))
+				$table->string('out_order_id',128)->index(); //外部订单ID (BDyyyyMMddHHmmss+round(0000~1000))
 				$table->decimal('product_total_price', 8, 2)->default(0); //商品总价
 				$table->integer('can_get_credit')->default(0); //购买商品得到的积分
 				$table->integer('used_credit')->default(0); //购买商品所花费的积分

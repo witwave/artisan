@@ -19,7 +19,7 @@ class CreateUserDaysTable extends Migration {
 		Schema::create('user_days', function (Blueprint $table) {
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
-			$table->integer('name')->unsigned();
+			$table->string('name',100);
 			$table->date('date');
 			$table->string('mark', 100)->nullable();
 			$table->boolean('remind_enable')->default(0);
