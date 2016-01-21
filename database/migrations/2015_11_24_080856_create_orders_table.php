@@ -30,8 +30,6 @@ class CreateOrdersTable extends Migration {
 	 * @return void
 	 */
 	public function up() {
-		Schema::dropIfExists('orders');
-
 		if (!Schema::hasTable('orders')) {
 			Schema::create('orders', function (Blueprint $table) {
 				$table->increments('id');
