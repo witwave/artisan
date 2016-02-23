@@ -54,22 +54,7 @@
                     <td>User deleted</td>
                     @endif
                     <td>{{ \App\Helpers\RHelper::formatCurrency($order->getTotalprice(), Lang::get('currency.currency')) }}</td>
-                    <td class="table-actions text-center">
-                        @if (count($order->getDiscounts()) > 0)
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-								{{ \App\Helpers\RHelper::formatCurrency(collect($order->getDiscounts())->sum('value'), Lang::get('currency.currency')) }}
-							</button>
-							<ul class="dropdown-menu" role="menu">
-                                @foreach ($order->getDiscounts() as $discount)
-								<li>
-									<a href="#">{{ $discount['name'] }}<br><span class="label label-primary">{{ \App\Helpers\RHelper::formatCurrency($discount['value'], Lang::get('currency.currency')) }}</span></a>
-								</li>
-                                @endforeach
-							</ul>
-						</div>
-                        @endif
-					</td>
+                    <td class="table-actions text-center"></td>
                     <td>{{ \App\Helpers\RHelper::formatCurrency($order->paid, Lang::get('currency.currency')) }}</td>
                     <td>{{ $order->payment_status }}</td>
                     <td>{{ $order->transaction_id }}</td>
