@@ -39,7 +39,6 @@
                     <th>{{ Lang::get('forms.ship_fee') }}</th>
                     <th>{{ Lang::get('forms.ship_one_fee') }}</th>
                     <th>{{ Lang::get('forms.credit') }}</th>
-                    <!-- <th>{{ Lang::get('forms.summary') }}</th> -->
                     <th>{{ Lang::get('forms.tags') }}</th>
                     <th>{{ Lang::get('forms.featured') }}</th>
                     <th>{{ Lang::get('forms.active') }}</th>
@@ -60,7 +59,6 @@
                     <td>{{ $product->ship_fee }}</td>
                     <td>{{ $product->ship_one_fee }}</td>
                     <td>{{ $product->credit }}</td>
-                    <!-- <td>{{ $product->short_description }}</td> -->
                         @foreach ($product->tags as $tag)
                         <span class="label label-info">{{ $tag->name }}</span>
                         @endforeach
