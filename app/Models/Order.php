@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $table = 'orders';
-    
+
     /**
      * The attributes that should be casted to native types.
      *
@@ -28,37 +28,37 @@ class Order extends Model
     protected $casts = [
         'options' => 'array',
     ];
-    
+
     public function user()
     {
         return $this->belongsTo('App\Models\User');
     }
-    
+
     public function products()
     {
         return $this->belongsToMany('App\Models\Product', 'order_product');
     }
-    
-    public function bundles()
-    {
-        return $this->belongsToMany('App\Models\Bundle', 'bundle_order');
-    }
-    
-    public function coupons()
-    {
-        return $this->belongsToMany('App\Models\Coupon', 'coupon_order');
-    }
-    
+
+    // public function bundles()
+    // {
+    //     return $this->belongsToMany('App\Models\Bundle', 'bundle_order');
+    // }
+    //
+    // public function coupons()
+    // {
+    //     return $this->belongsToMany('App\Models\Coupon', 'coupon_order');
+    // }
+
     public function delete()
     {
         // Remove product association
         $this->products()->detach();
-        $this->bundles()->detach();
-        $this->coupons()->detach();
-        
+        // $this->bundles()->detach();
+        // $this->coupons()->detach();
+
         return parent::delete();
     }
-    
+
     /*
      * Return the sum of all products and bundles prices.
      *
@@ -67,11 +67,11 @@ class Order extends Model
     public function getTotalprice()
     {
         $totalprice = 0;
-        $totalprice += $this->bundles()->sum('price');
+        // $totalprice += $this->bundles()->sum('price');
         $totalprice += $this->products()->sum('price');
         return $totalprice;
     }
-    
+
     /*
      * Perform a check on the coupon before adding to the order.
      * Recommended if you need to check coupon's multiple_coupons flag before adding it.
@@ -95,16 +95,16 @@ class Order extends Model
                 throw new Exception('This coupon does not allow multiple coupons.');
             }
         }
-        
+
         // All checks passed, proceed to add coupon to order
         $this->coupons()->save($coupon);
-        
+
         return $coupon;
     }
-    
+
     /*
      * Return discounts saved in options['discounts'].
-     * If it's empty, call setDiscounts() to verify all coupons and return an array of dicounts 
+     * If it's empty, call setDiscounts() to verify all coupons and return an array of dicounts
      * with their corresponding product or bundle.
      * Coupon will be verified on product and bundle level before checking for category.
      *
@@ -113,16 +113,16 @@ class Order extends Model
     public function getDiscounts()
     {
         $options = $this->options;
-        
+
         if ($options) {
             if (array_key_exists('discounts', $options)) {
                 return $options['discounts'];
             }
         }
-        
+
         return $this->setDiscounts();
     }
-    
+
     /*
      * Verify and save discounts into options['discounts'].
      * Verify all coupons and return an array of dicounts with their corresponding product or bundle.
@@ -133,52 +133,52 @@ class Order extends Model
     public function setDiscounts()
     {
         $discounts = array();
-        
+
         // Loop through all coupons
         foreach ($this->coupons as $coupon) {
             // Loop through all products
             foreach ($this->products as $product) {
                 $product_coupon = $this->verifyCoupon($product, $coupon);
-                
+
                 if ($product_coupon) {
                     $discounts[] = $product_coupon;
                     continue;
                 }
-                
+
                 // Product doesn't qualify for coupon, check if category qualifies
                 $category_coupon = $this->verifyCoupon($product->category, $coupon, $product);
-                
+
                 if ($category_coupon) {
                     $discounts[] = $category_coupon;
                 }
             }
-            
+
             // Loop through all bundles
             foreach ($this->bundles as $bundle) {
                 $bundle_coupon = $this->verifyCoupon($bundle, $coupon);
-                
+
                 if ($bundle_coupon) {
                     $discounts[] = $bundle_coupon;
                     continue;
                 }
-                
+
                 // Bundle doesn't qualify for coupon, check if category qualifies
                 $category_coupon = $this->verifyCoupon($bundle->category, $coupon, $bundle);
-                
+
                 if ($category_coupon) {
                     $discounts[] = $category_coupon;
                 }
             }
         }
-        
+
         $options = $this->options;
         $options['discounts'] = $discounts;
         $this->options = $options;
         $this->save();
-        
+
         return $discounts;
     }
-    
+
     /*
      * Verify if coupon is application to the product or bundle
      *
@@ -192,7 +192,7 @@ class Order extends Model
         $totalprice = $this->getTotalprice();
         $discount = null;
         $now = new DateTime('now');
-        
+
         // Check if user limit exceeded (only check Completed transaction)
         // Excluding this order
         $coupon_used = $coupon->orders()
@@ -205,11 +205,11 @@ class Order extends Model
                 return null; // Skip this coupon, already exceeded quota
             }
         }
-        
+
         if (! $model) {
             return null;
         }
-        
+
         // Continue with checks on start_date, end_date, min_spent, max_spent and usage_limit_per_coupon
         $model_coupon = $model->coupons()
             ->where('coupon_id', $coupon->id)
@@ -250,7 +250,7 @@ class Order extends Model
                 'value' => $value
             );
         }
-        
+
         return $discount;
     }
 }
