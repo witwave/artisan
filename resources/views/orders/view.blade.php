@@ -65,7 +65,7 @@
 							<ul class="dropdown-menu pull-right" role="menu">
                                 @foreach ($order->products as $product)
 								<li>
-									<a href="#">{{ $product->name }}<br><span class="label label-primary">{{ $product->sku }} {{ $product->qty}}{{}}</span></a>
+									<a href="http://www.bdbeloved.com/product/{{$product->product_id}}.html">{{ $product->name }}<br><span class="label label-primary">{{ $product->sku }} {{ $product->qty}} </span></a>
 								</li>
                                 @endforeach
 							</ul>
