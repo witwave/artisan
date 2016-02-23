@@ -84,7 +84,7 @@ class ProductController extends Controller {
 		 * Validate
 		 */
 		$rules = array(
-			'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
+			'image' => 'mimes:jpg,jpeg,png,gif|max:10240',
 			'name' => 'required|unique:products,name' . (isset($sid) ? ',' . $sid : ''),
 			'short_description' => 'required',
 			'price' => 'numeric',
