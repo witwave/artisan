@@ -68,8 +68,9 @@ class Order extends Model
     {
         $totalprice = 0;
         // $totalprice += $this->bundles()->sum('price');
-        $totalprice += $this->products()->sum('price');
-        return $totalprice;
+      //  $totalprice += $this->products()->sum('price');
+      //  return $totalprice;
+      return $this->product_total_price;
     }
 
     /*
