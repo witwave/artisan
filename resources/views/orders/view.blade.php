@@ -32,9 +32,8 @@
                 <tr>
                     <th>User</th>
                     <th>{{ Lang::get('forms.email') }}</th>
-                    <th>{{ Lang::get('forms.total_price') }}</th>
-                    <th>{{ Lang::get('forms.total_discount') }}</th>
-                    <th>{{ Lang::get('forms.paid') }}</th>
+                    <th>商品总价</th>
+                    <th>订单最终价</th>
                     <th>{{ Lang::get('forms.payment_status') }}</th>
                     <th>{{ Lang::get('forms.transaction_id') }}</th>
                     <th>{{ Lang::get('forms.ordered_on') }}</th>
@@ -47,7 +46,7 @@
                 @foreach($orders as $order)
                 <tr>
                     @if ($order->user != null)
-                    <td>{{ $order->user->name }} {{ $order->user->last_name }}</td>
+                    <td>{{ $order->user->name }} {{ $order->user->realname }}</td>
                     <td>{{ $order->user->email }}</td>
                     @else
                     <td>User deleted</td>
@@ -61,7 +60,7 @@
                     <td>{{ $order->created_at }}</td>
 
                     <td class="table-actions text-center">
-                        @if ($order->products()->count() > 0)
+
                         <div class="btn-group">
                             <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 								<span class="glyphicon glyphicon-shopping-cart"></span>
@@ -74,7 +73,7 @@
                                 @endforeach
 							</ul>
 						</div>
-                        @endif
+                      
 					</td>
                     <td class="table-actions text-right">
                         <div class="btn-group">
