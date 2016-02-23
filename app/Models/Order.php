@@ -36,7 +36,7 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Models\Product', 'order_product');
+        return $this->belongsToMany('App\Models\Product', 'order_product')->pluck('order_product.price', 'order_product.price as product_price');
     }
 
     // public function bundles()
