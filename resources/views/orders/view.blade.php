@@ -53,14 +53,12 @@
                     <td>User deleted</td>
                     @endif
                     <td>{{ \App\Helpers\RHelper::formatCurrency($order->getTotalprice(), Lang::get('currency.currency')) }}</td>
-                    <td class="table-actions text-center"></td>
                     <td>{{ \App\Helpers\RHelper::formatCurrency($order->paid, Lang::get('currency.currency')) }}</td>
                     <td>{{ $order->payment_status }}</td>
                     <td>{{ $order->transaction_id }}</td>
-                    <td>{{ $order->created_at }}</td>
+                    <td>{{ $order->created_at }} {{ json_encode($order->products) }}</td>
 
                     <td class="table-actions text-center">
-
                         <div class="btn-group">
                             <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 								<span class="glyphicon glyphicon-shopping-cart"></span>
@@ -73,7 +71,7 @@
                                 @endforeach
 							</ul>
 						</div>
-                      
+
 					</td>
                     <td class="table-actions text-right">
                         <div class="btn-group">
