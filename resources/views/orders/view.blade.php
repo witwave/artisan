@@ -36,8 +36,7 @@
                     <th>订单最终价</th>
                     <th>{{ Lang::get('forms.payment_status') }}</th>
                     <th>{{ Lang::get('forms.transaction_id') }}</th>
-                    <th>{{ Lang::get('forms.ordered_on') }}</th>
-                    <th>{{ Lang::get('forms.coupons') }}</th>
+                    <th>下单时间</th>
                     <th>{{ Lang::get('forms.items') }}</th>
                     <th></th>
                 </tr>
@@ -56,7 +55,7 @@
                     <td>{{ \App\Helpers\RHelper::formatCurrency($order->paid, Lang::get('currency.currency')) }}</td>
                     <td>{{ $order->payment_status }}</td>
                     <td>{{ $order->transaction_id }}</td>
-                    <td>{{ $order->created_at }} {{ json_encode($order->products) }}</td>
+                    <td>{{ $order->created_at }}</td>
 
                     <td class="table-actions text-center">
                         <div class="btn-group">
@@ -66,7 +65,7 @@
 							<ul class="dropdown-menu pull-right" role="menu">
                                 @foreach ($order->products as $product)
 								<li>
-									<a href="#">{{ $product->name }}<br><span class="label label-primary">{{ $product->sku }}</span></a>
+									<a href="#">{{ $product->name }}<br><span class="label label-primary">{{ $product->sku }} {{ $product->qty}}{{}}</span></a>
 								</li>
                                 @endforeach
 							</ul>
