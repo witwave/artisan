@@ -45,7 +45,7 @@
                 @foreach($orders as $order)
                 <tr>
                     @if ($order->user != null)
-                    <td>{{ $order->user->name }} {{ $order->user->realname }}</td>
+                    <td>{{ $order->user->name }} {{ $order->user->nickname }}</td>
                     <td>{{ $order->user->email }}</td>
                     @else
                     <td>User deleted</td>
