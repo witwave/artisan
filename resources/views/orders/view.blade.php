@@ -51,8 +51,8 @@
                     <td>User deleted</td>
                     <td>User deleted</td>
                     @endif
-                    <td>{{ \App\Helpers\RHelper::formatCurrency($order->getTotalprice(), Lang::get('currency.currency')) }}</td>
-                    <td>{{ \App\Helpers\RHelper::formatCurrency($order->paid, Lang::get('currency.currency')) }}</td>
+                    <td>{{ $order->getTotalprice() }}</td>
+                    <td>{{ $order->paid }}</td>
                     <td>{{ $order->payment_status }}</td>
                     <td>{{ $order->transaction_id }}</td>
                     <td>{{ $order->created_at }}</td>
@@ -65,7 +65,7 @@
 							<ul class="dropdown-menu pull-right" role="menu">
                                 @foreach ($order->products as $product)
 								<li>
-									<a href="http://www.bdbeloved.com/product/{{$product->product_id}}.html">{{ $product->name }}<br><span class="label label-primary">{{ $product->sku }} {{ $product->qty}} </span></a>
+									<a href="http://www.bdbeloved.com/product/{{$product->product_id}}.html" target="_blank">{{ $product->name }}<br><span class="label label-primary">{{ $product->sku }} {{ $product->qty}} </span></a>
 								</li>
                                 @endforeach
 							</ul>
