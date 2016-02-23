@@ -84,7 +84,7 @@ class ProductController extends Controller {
 		 * Validate
 		 */
 		$rules = array(
-			'image' => 'mimes:jpg,jpeg,png,gif|max:500',
+			'image' => 'mimes:jpg,jpeg,png,gif|max:4096',
 			'name' => 'required|unique:products,name' . (isset($sid) ? ',' . $sid : ''),
 			'short_description' => 'required',
 			'price' => 'numeric',
@@ -110,9 +110,9 @@ class ProductController extends Controller {
 			$image = Input::file('image');
 			$featured = (Input::get('featured') == '' ? false : true);
 			$active = (Input::get('active') == '' ? false : true);
-			
+
 			$can_use_credit = (Input::get('can_use_credit') == '' ? false : true);
-			
+
 			$category_id = Input::get('category_id');
 			$tags = Input::get('tags');
 
@@ -126,7 +126,7 @@ class ProductController extends Controller {
 			$ship_mark = Input::get('ship_mark');
 			$market_price = Input::get('market_price');
 			$show_market_price = $market_price > 0;
-			
+
 			$material = Input::get('material');
 
 			$qty = Input::get('qty', 0);
