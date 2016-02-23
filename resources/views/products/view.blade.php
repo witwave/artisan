@@ -59,6 +59,7 @@
                     <td>{{ $product->ship_fee }}</td>
                     <td>{{ $product->ship_one_fee }}</td>
                     <td>{{ $product->credit }}</td>
+                    <td>
                         @foreach ($product->tags as $tag)
                         <span class="label label-info">{{ $tag->name }}</span>
                         @endforeach
