@@ -52,5 +52,5 @@ Route::group(['middleware' => '\App\Http\Middleware\Authenticate','prefix' => 'a
     Route::controller('orders', 'OrderController');
     Route::controller('bundles', 'BundleController');
 
-    Route::controller('orders/detail/{id}', 'OrderController@getDetail');
+    Route::get('orders/detail/{id}', 'OrderController@getDetail');
 });
