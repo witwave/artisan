@@ -15,7 +15,13 @@ class OrderController extends Controller
 
         return view('orders/view')->with('orders', $orders);
     }
-    
+
+    public function getDetail($id)
+    {
+        $order=Order::where('out_order_id','=',$id)->first();
+        return view('orders/detail')->with('order', $order);
+    }
+
     public function getEmails()
     {
         $emails = User::lists('email');
@@ -43,7 +49,7 @@ class OrderController extends Controller
             ->with('coupons', $coupons)
             ->with('payment_statuses', $payment_statuses);
     }
-    
+
     public function getEdit($sid = null)
     {
         $sid = null;
@@ -71,18 +77,18 @@ class OrderController extends Controller
         $validation = \Validator::make(\Input::all(), $rules);
 
         $redirect_url = (isset($sid)) ? 'admin/orders/edit/' . $sid : 'admin/orders/create';
-        
+
         if ($validation->fails()) {
             return redirect($redirect_url)->withErrors($validation)->withInput();
         }
-        
+
         $transaction_id = \Input::get('transaction_id');
         $payment_status = \Input::get('payment_status');
         $paid           = \Input::get('paid');
         $email          = \Input::get('email');
-        
+
         $apply_to_models = array();
-        
+
         // Save products to order
         $products = \Input::get('product_id');
         if (count($products) > 0) {
@@ -110,28 +116,28 @@ class OrderController extends Controller
             $errors->add('productError', "The items selected may have been deleted. Please try again.");
             return redirect($redirect_url)->withErrors($errors)->withInput();
         }
-        
+
         $user = User::where('email', $email)->first();
-        
+
         if ($user == null) {
             // No such user
             $errors = new \Illuminate\Support\MessageBag;
             $errors->add('userError', "The user may have been deleted. Please try again.");
             return redirect($redirect_url)->withErrors($errors)->withInput();
         }
-        
+
         $new_order = new Order;
         $new_order->user_id = $user->id;
         $new_order->paid = $paid;
         $new_order->transaction_id = $transaction_id;
         $new_order->payment_status = $payment_status;
         $new_order->save();
-        
+
         // Save the products/bundles
         foreach ($apply_to_models as $apply_to_model) {
             $apply_to_model->orders()->save($new_order);
         }
-        
+
         // Save coupons to order
         $coupons = \Input::get('coupon_id');
         if (count($coupons) > 0) {
@@ -145,34 +151,34 @@ class OrderController extends Controller
                         $errors->add('couponError',
                             "Coupon " . $model->code . " cannot be added because: " . $exp->getMessage()
                         );
-                        
+
                     }
                 }
             }
-            
+
             // Set coupon discount
             $new_order->setDiscounts();
-            
+
             if (count($errors) > 0) {
                 return redirect('admin/orders')->withErrors($errors);
             }
         }
-        
+
         return redirect('admin/orders');
     }
-    
+
     public function getDelete($sid)
     {
         $order = Order::find($sid);
-        
+
         if ($order == null) {
             $errors = new \Illuminate\Support\MessageBag;
             $errors->add('userError', "The order record may have already been deleted.");
             return redirect('admin/orders')->withErrors($errors);
         }
-        
+
         $order->delete();
-        
+
         return redirect('admin/orders');
     }
 }

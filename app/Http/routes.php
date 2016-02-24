@@ -8,7 +8,7 @@
   Route::get('/', function() {
        return view('welcome');
     });
-  
+
 
 
 Route::group(['prefix'=>'auth'],function(){
@@ -16,7 +16,7 @@ Route::group(['prefix'=>'auth'],function(){
     Route::get('/', function() {
          return redirect('auth/login');
     });
-    
+
    Route::get('login', 'Mall\AuthController@getLogin');
    Route::get('logout', 'Mall\AuthController@getLogout');
    Route::get('register', 'Mall\AuthController@getRegister');
@@ -26,7 +26,7 @@ Route::group(['prefix'=>'auth'],function(){
 
 Route::controller('login', 'LoginController');
 Route::get('logout', 'LoginController@getLogout');
- 
+
 
 Route::group(['middleware' => '\App\Http\Middleware\Authenticate','prefix' => 'admin'], function () {
     Route::get('/', function() {
@@ -51,5 +51,6 @@ Route::group(['middleware' => '\App\Http\Middleware\Authenticate','prefix' => 'a
     Route::controller('pages', 'PageController');
     Route::controller('orders', 'OrderController');
     Route::controller('bundles', 'BundleController');
-});
 
+    Route::controller('orders/detail/{id}', 'OrderController@getDetail');
+});

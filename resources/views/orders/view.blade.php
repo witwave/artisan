@@ -30,7 +30,7 @@
         <table class="table table-bordered table-striped table-condensed">
             <thead>
                 <tr>
-                    <th>User</th>
+                    <th>用户</th>
                     <th>{{ Lang::get('forms.email') }}</th>
                     <th>商品总价</th>
                     <th>订单最终价</th>
@@ -38,7 +38,7 @@
                     <th>{{ Lang::get('forms.transaction_id') }}</th>
                     <th>下单时间</th>
                     <th>{{ Lang::get('forms.items') }}</th>
-                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -54,7 +54,7 @@
                     <td>{{ $order->getTotalprice() }}</td>
                     <td>{{ $order->paid }}</td>
                     <td>{{ $order->payment_status }}</td>
-                    <td>{{ $order->transaction_id }}</td>
+                    <td><a target="_blank" href="admin/orders/detail/{{ $order->transaction_id }}"> {{ $order->transaction_id }}</a></td>
                     <td>{{ $order->created_at }}</td>
 
                     <td class="table-actions text-center">
