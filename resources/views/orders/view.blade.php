@@ -54,7 +54,7 @@
                     <td>{{ $order->getTotalprice() }}</td>
                     <td>{{ $order->paid }}</td>
                     <td>{{ $order->payment_status }}</td>
-                    <td><a target="_blank" href="admin/orders/detail/{{ $order->transaction_id }}"> {{ $order->transaction_id }}</a></td>
+                    <td><a target="_blank" href="orders/detail/{{ $order->transaction_id }}"> {{ $order->transaction_id }}</a></td>
                     <td>{{ $order->created_at }}</td>
 
                     <td class="table-actions text-center">

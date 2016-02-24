@@ -3,18 +3,19 @@
 订单详情
 @endsection
 @section('content')
-    <section class="page-info-block boxed-section">
-        <!-- Container -->
-        <div class="container cont-pad-x-15">
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb pull-left">
-                <li><a href="/"><i class="ti ti-home"></i></a></li>
-                <li class="active">订单详情</li>
-            </ol>
-            <!-- /Breadcrumb -->
-        </div>
-        <!-- /Container -->
-    </section>
+<div class="row">
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="{{ URL::to('admin') }}">{{ Lang::get('menus.home') }}</a></li>
+            <li><a href="{{ URL::to('admin/orders') }}">{{ Lang::get('menus.orders') }}</a></li>
+            <li class="active">订单详情</li>
+        </ol>
+    </div>
+</div>
+
+
+
+
     <section class="content-block default-bg">
         <!-- Container -->
         <div class="container cont-pad-y-sm">
@@ -158,7 +159,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary checkout">去付款
+                        <button type="submit" class="btn btn-primary checkout hide">去付款
                         </button>
                       </div>
                     </div>
