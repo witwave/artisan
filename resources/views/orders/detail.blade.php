@@ -183,8 +183,8 @@
                         @foreach($order->products as $index=>$product)
                             <tr>
                                 <td>
-                                  <a href="/product/{{$product->product_id}}.html">
-                                      <img src="/img/{{$product->product_id}}"/>
+                                  <a href="http://bdbeloved.com/product/{{$product->product_id}}.html">
+                                      <img src="http://bdbeloved.com/img/{{$product->product_id}}"/>
                                       {{ $product->name}}
                                   </a>
                                 </td>
